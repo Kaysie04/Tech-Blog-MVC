@@ -11,7 +11,7 @@ class User extends Model {
     }
   }
 
-  //colums for User model
+  //columns for User model
   User.init({
     id: {
         type: DataTypes.INTEGER,
