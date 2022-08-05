@@ -16,6 +16,7 @@ router.get('/', async (req,res)=> {
     })
     res.status(200).json(userData)
     } catch (err) {
+        console.log(err);
         res.status(500).json(err)
     }
 });
@@ -44,6 +45,7 @@ router.get('/', async (req,res)=> {
     })
     res.status(200).json(userData)
     } catch (err) {
+        console.log(err);
         res.status(500).json(err)
     }
 });
@@ -70,6 +72,7 @@ router.post('/', async (req, res)=> {
             });
             }
     } catch (err) {
+        console.log(err);
         res.status(500).json(err)
     }
 })
@@ -132,6 +135,7 @@ router.put('/:id', (req, res) => {
         res.json(userData);
     })
     .catch(err => {
+        console.log(err);
         res.status(500).json(err);
     })
 })
@@ -151,18 +155,10 @@ router.delete('/:id', (req, res) => {
         res.json(userData);
     })
     .catch(err=> {
+        console.log(err);
         res.status(500).json(err)
     })
 })
-
-
-
-
-
-
-
-
-
 
 module.exports = router;
 

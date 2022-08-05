@@ -32,6 +32,7 @@ router.get('/', (req, res)=> {
     })
     .then(postData => res.json(postData))
     .catch(err => {
+        console.log(err);
         res.status(500).json(error)
     });
 })
@@ -67,6 +68,7 @@ router.get('/:id', (res, req)=> {
         }
         res.json(postData);
     }).catch(err => {
+        console.log(err);
         res.status(500).json(err);
     });
 });
@@ -84,6 +86,7 @@ router.post('/', withAuth, (req, res)=> {
     })
     .then(postData => res.json(postData))
     .catch(err => {
+        console.log(err);
         res.status(500).json(err);
     });
 });
@@ -104,6 +107,7 @@ router.put('/:id', withAuth, (res, req) => {
         res.json(postData);
     })
     .catch(err => {
+        console.log(err);
         res.status(500).json(err);
     });
 })
@@ -123,6 +127,7 @@ router.delete('/:id', (req, res)=> {
         res.json(postData)
     })
     .catch(err => {
+        console.log(err);
         res.status(500).json(err);
     });
 });
