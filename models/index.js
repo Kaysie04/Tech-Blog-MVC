@@ -1,16 +1,13 @@
-// import all models
+// IMPORT ALL MODELS
+
 const Post = require('./Post');
 const User = require('./User');
 const Comment = require('./Comment');
 
 
-// create associations
+// CREATE ASSOCIATIONS
 
-
-// a user can create many posts, 
-//those posts belong to the user,
-// the post is assoicated with the user through the user_id
-
+// USER TO POST RELATIONSHIP
 User.hasMany(Post,{
     foreignKey: 'user_id'
 });
@@ -20,21 +17,26 @@ Post.belongsTo(User, {
     onDelete: 'SET NULL'
 });
 
+// COMMENT TO USER RELATIONSHIP
 Comment.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'SET NULL'
 });
 
+//COMMENT TO POST RELATIONSHIP
 Comment.belongsTo(Post, {
     foreignKey: 'post_id',
     onDelete: 'SET NULL'
 });
 
+//USER TO COMMENT RELATIONSHIP
 User.hasMany(Comment, {
     foreignKey: 'user_id',
     onDelete: 'SET NULL'
 });
 
+
+// POST TO COMMENT RELATIONSHIP
 Post.hasMany(Comment, {
     foreignKey: 'post_id'
 });
