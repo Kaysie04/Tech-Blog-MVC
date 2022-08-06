@@ -1,6 +1,6 @@
 const {Post} = require('../models')
 
-const PostData = [
+const postData = [
     {
         title: 'What is a 400 error?',
         post_entry: '400 means Bad Request. Essentially the server cannot process the request by the user.',
@@ -25,5 +25,9 @@ const PostData = [
         title: 'How to write API routes',
         post_entry: 'This is how you write API routes',
         user_id: 5
-    },
+    }
 ]
+
+const seedPosts = () => Post.bulkCreate(postData);
+
+module.exports = seedPosts;
