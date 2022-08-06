@@ -15,14 +15,14 @@ Comment.init(
             autoIncrement: true
         },
 
-        title: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: true
+        // title: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        //     validate: {
+        //         notEmpty: true
 
-            }
-        },
+        //     }
+        // },
 
         comment_entry: {
             type: DataTypes.TEXT,
