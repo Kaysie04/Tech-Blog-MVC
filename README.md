@@ -50,7 +50,7 @@ THEN I am able to view comments but I am prompted to log in again before I can a
 
 
 ## Deployed Application
-Click [here](https://watch.screencastify.com/v/sMZbKjHVIKFyoxdpMg10) for the deployed application.
+Click [here](https://tech-blog-mvc-kla.herokuapp.com/) for the deployed application.
 
 ## License
 MIT
