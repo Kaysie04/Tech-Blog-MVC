@@ -46,7 +46,7 @@ router.get('/', withAuth, (req, res) => {
   
 
 // if user wants to edit one of their existing posts
-router.get('edit/:id', withAuth, (req, res)=> {
+router.get('/edit/:id', withAuth, (req, res)=> {
     Post.findByPk(req.params.id,{
         attributes: [
             'id',

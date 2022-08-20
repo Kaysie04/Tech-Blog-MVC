@@ -90,7 +90,7 @@ router.post('/', withAuth, (req, res) => {
     });
 });
 
-// user wants to update a post
+// user wants to edit a post
 router.put('/:id', withAuth, (res, req) => {
     Post.update(req.body,
         {
