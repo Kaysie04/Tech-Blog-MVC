@@ -15,17 +15,8 @@ Comment.init(
             autoIncrement: true
         },
 
-        // title: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     validate: {
-        //         notEmpty: true
-
-        //     }
-        // },
-
-        comment_entry: {
-            type: DataTypes.TEXT,
+        comment_text: {
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notEmpty: true
@@ -36,6 +27,14 @@ Comment.init(
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
+                key: 'id'
+            }
+        },
+
+        post_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'post',
                 key: 'id'
             }
         }

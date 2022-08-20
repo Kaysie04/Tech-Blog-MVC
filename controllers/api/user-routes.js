@@ -5,6 +5,11 @@ const router = require('express').Router();
 // Need to access the models inorder to query their data
 const {User, Post, Comment} = require('../../models');
 
+const session = require('express-session');
+
+const withAuth = require('../../utils/auth');
+
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // GET REQUESTS
 
@@ -23,7 +28,7 @@ router.get('/', async (req,res)=> {
 
 
 // query to get one user
-router.get('/', async (req,res)=> {
+router.get('/:id', async (req,res)=> {
     try{  
         const userData =  await User.findOne({
         attributes: { exclude: ['password']},
@@ -31,11 +36,11 @@ router.get('/', async (req,res)=> {
         include: [
           {
             model: Post,
-            attributes:['id', 'title', 'post_entry', 'create_at']
+            attributes:['id', 'title', 'post_text', 'created_at']
           },
           {
             model: Comment,
-            attributes: ['id', 'comment_entry', 'create_at'],
+            attributes: ['id', 'comment_text', 'created_at'],
             include: {
                 model: Post,
                 attributes: ['title']
@@ -61,16 +66,15 @@ router.post('/', async (req, res)=> {
             email: req.body.email,
             password: req.body.password
         });
-
-         (userData) => {
             req.session.save(() => {
                 req.session.user_id = userData.id;
                 req.session.username = userData.username;
                 req.session.loggedIn = true;
 
                 res.json(userData)
+                res.status(200).json()
             });
-            }
+            
     } catch (err) {
         console.log(err);
         res.status(500).json(err)
@@ -107,7 +111,7 @@ router.post('/login', async (req,res)=> {
 
 //  user wants to logout
 
-router.post('.login', (req, res)=> {
+router.post('/logout', withAuth, (req, res)=> {
     if(req.session.loggedIn) {
         req.session.destroy(()=> {
             res.status(204).end();
@@ -121,9 +125,9 @@ router.post('.login', (req, res)=> {
 // PUT REQUESTS
 
 // user wants to update their data
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     User.update(req.body, {
-        idividualHooks: true,
+        individualHooks: true,
         where: { id: req.params.id}
     })
     .then(userData => {
@@ -143,7 +147,7 @@ router.put('/:id', (req, res) => {
 // DELETE REQEUSTS
 
 // user wants to delete their data
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     User.destroy({
         where: {id: req.params.id}
     })

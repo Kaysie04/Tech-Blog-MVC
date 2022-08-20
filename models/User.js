@@ -47,11 +47,15 @@ class User extends Model {
   },
   {
     hooks: {
-        // BEFORE A NEW USER IS CREATED, BCRYPT WILL ENCRYPT THE PASSWORD THE USER INPUTS
-        async beforeCreate(newUser) {
-            newUser.password = await bcrypt.hash(newUser.password, 10)
-            return newUser
-        }
+        
+        async beforeCreate(newUserData) {
+            newUserData.password = await bcrypt.hash(newUserData.password, 10);
+            return newUserData;
+          },
+        async beforeUpdate(updatedUserData) {
+            updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+            return updatedUserData;
+          }
     },
 
     sequelize,

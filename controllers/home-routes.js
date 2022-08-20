@@ -11,7 +11,7 @@ router.get('/', (req, res)=> {
         // what columns to include from the post table
         attributes: [
             'id',
-            'post_entry',
+            'post_text',
             'title',
             'created_at',
         ],
@@ -29,7 +29,7 @@ router.get('/', (req, res)=> {
             },
             {
                 model: Comment,
-                attributes: ['id', 'comment_entry', 'post_id', 'user_id', 'created_at'],
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                 include: {
                     model: User,
                     attributes: ['username']
@@ -54,7 +54,7 @@ router.get('/post/:id', (req,res)=> {
         where: { id: req.params.id},
         attributes: [
             'id',
-            'post_entry',
+            'post_text',
             'title',
             'created_at',
         ],
@@ -65,7 +65,7 @@ router.get('/post/:id', (req,res)=> {
             },
             {
                 model: Comment,
-                attributes: ['id', 'comment_entry', 'post_id', 'user_id', 'created_at'],
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                 include: {
                     model: User,
                     attributes: ['username']
@@ -79,7 +79,7 @@ router.get('/post/:id', (req,res)=> {
             return;
         }
         const post = postData.get({plain: true});
-        res.render('one-post', {
+        res.render('single-post', {
             post,
             loggedIn: req.session.loggedIn
         });
@@ -109,7 +109,7 @@ router.get('/signup', (req,res)=> {
         return;
     }
     // if user is not logged in signup page will load
-    res.render('/signup');
+    res.render('signup');
 })
 
 module.exports = router;

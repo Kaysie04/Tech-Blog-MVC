@@ -14,31 +14,35 @@ User.hasMany(Post,{
 
 Post.belongsTo(User, {
     foreignKey: 'user_id',
-    onDelete: 'SET NULL'
 });
 
 // COMMENT TO USER RELATIONSHIP
 Comment.belongsTo(User, {
     foreignKey: 'user_id',
-    onDelete: 'SET NULL'
+    onDelete: 'cascade'
+    
 });
 
 //COMMENT TO POST RELATIONSHIP
 Comment.belongsTo(Post, {
     foreignKey: 'post_id',
-    onDelete: 'SET NULL'
+    onDelete: 'cascade',
+   
 });
 
 //USER TO COMMENT RELATIONSHIP
 User.hasMany(Comment, {
     foreignKey: 'user_id',
-    onDelete: 'SET NULL'
+    onDelete: 'cascade',
+   
 });
 
 
 // POST TO COMMENT RELATIONSHIP
 Post.hasMany(Comment, {
-    foreignKey: 'post_id'
+    foreignKey: 'post_id',
+    onDelete: 'cascade',
+   
 });
 
 module.exports = { User, Post, Comment };
